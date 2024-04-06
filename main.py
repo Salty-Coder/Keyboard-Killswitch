@@ -93,4 +93,4 @@ keyboard.on_release(on_release)
 countdown_thread = None
 
 # End on ESC key
-keyboard.wait('esc')
+keyboard.wait('shift + esc')
