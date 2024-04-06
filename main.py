@@ -66,7 +66,7 @@ def countdown():
     for i in range(5, 0, -1):
         print(f"Countdown: {i} seconds left")
         for _ in range(5):  # Check every 0.2 seconds
-            if keyboard.is_pressed('space'):
+            if keyboard.is_pressed('caps lock'):
                 print("Space key pressed again, resetting countdown")
                 return
             time.sleep(0.2)
@@ -76,7 +76,7 @@ def countdown():
 
 def on_release(event):
     global countdown_thread
-    if event.name == 'space' and event.event_type == keyboard.KEY_UP:
+    if event.name == 'caps lock' and event.event_type == keyboard.KEY_UP:
         if not detonated:
             countdown_thread = threading.Thread(target=countdown)
             countdown_thread.start()
