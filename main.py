@@ -57,6 +57,12 @@ def open_fullscreen_text_file(file_path, window_width=800, window_height=600, fo
 
     # Create a borderless window
     root.overrideredirect(True)
+    # Prevent window from being moved around
+    def reset_window_position():
+        root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        if not fullscreen:
+            root.after(700, reset_window_position)  # Reset position every 700ms
+    reset_window_position()
 
     root.mainloop()
 
