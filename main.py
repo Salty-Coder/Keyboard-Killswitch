@@ -61,13 +61,17 @@ def open_fullscreen_text_file(file_path, window_width=800, window_height=600, fo
     root.mainloop()
 
 
+counting = False
 
 def countdown():
+    global counting
+    counting = True
     for i in range(5, 0, -1):
         print(f"Countdown: {i} seconds left")
         for _ in range(5):  # Check every 0.2 seconds
             if keyboard.is_pressed('caps lock'):
                 print("Space key pressed again, resetting countdown")
+                counting = False
                 return
             time.sleep(0.2)
     detonate()
@@ -75,9 +79,10 @@ def countdown():
 
 
 def on_release(event):
+    global counting
     global countdown_thread
     if event.name == 'caps lock' and event.event_type == keyboard.KEY_UP:
-        if not detonated:
+        if not detonated and not counting:
             countdown_thread = threading.Thread(target=countdown)
             countdown_thread.start()
 
