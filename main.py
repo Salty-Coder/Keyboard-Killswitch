@@ -25,7 +25,7 @@ def detonate():
 
 
 
-def open_fullscreen_text_file(file_path, window_width=800, window_height=600, font_size=60):
+def open_fullscreen_text_file(file_path, window_width=800, window_height=600, font_size=70):
     root = tk.Tk()
 
     # Get the screen width and height
