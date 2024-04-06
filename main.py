@@ -26,19 +26,22 @@ def detonate():
 
 
 def open_fullscreen_text_file(file_path, window_width=800, window_height=600, font_size=70):
+
+    global fullscreen
+    fullscreen = False
+
     root = tk.Tk()
 
-    # Get the screen width and height
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
 
     x = (screen_width - window_width) // 2
     y = (screen_height - window_height) // 2
 
-    # Set the window position and size
+
     root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
-    root.title("Text Viewer")
+    root.title("hello 👋")
 
     custom_font = font.Font(family="Base 05", size=font_size)
 
@@ -50,19 +53,28 @@ def open_fullscreen_text_file(file_path, window_width=800, window_height=600, fo
 
     root.wm_attributes("-topmost", True)
     text_widget.configure(state='disabled')
+
     def on_closing():
-        pass  # Do nothing
+        global fullscreen
+        fullscreen = not fullscreen
+        root.attributes("-fullscreen", fullscreen)
 
     root.protocol("WM_DELETE_WINDOW", on_closing)
 
-    # Create a borderless window
-    root.overrideredirect(True)
+    # Disable the minimize + maximise buttons
+    root.attributes('-toolwindow', 1)
+
+
     # Prevent window from being moved around
     def reset_window_position():
         root.geometry(f"{window_width}x{window_height}+{x}+{y}")
         if not fullscreen:
             root.after(700, reset_window_position)  # Reset position every 700ms
     reset_window_position()
+
+
+    
+
 
     root.mainloop()
 
